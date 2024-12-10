@@ -1,0 +1,32 @@
+.recipe-container {
+    background-image: url('src/assets/image/calum-lewis-vA1L1jRTM70-unsplash.jpg'); /* Replace with your desired image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Full height for the container */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .row {
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background for content */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px; /* Constrain the maximum width of the content */
+  }
+  
+  .recipe-list-section {
+    border-right: 1px solid #ccc; /* Optional: Divider line */
+    padding-right: 15px;
+  }
+  
+  .recipe-detail-section {
+    padding-left: 15px;
+  }
+
+  
+  

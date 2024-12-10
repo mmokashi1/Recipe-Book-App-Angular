@@ -1,15 +1,10 @@
-<div class="row">
-  <div class="col-md-5">
-    <app-recipe-list></app-recipe-list>
-  </div>
-  <div class="col-md-7">
-    <!-- <app-recipe-detail
-      *ngIf="selectedRecipe; else infoText"
-      [recipe]="selectedRecipe"
-    ></app-recipe-detail>
-    <ng-template #infoText>
-      <p>Please select a Recipe</p>
-    </ng-template> -->
-    <router-outlet></router-outlet>
+<div class="recipe-container">
+  <div class="row">
+    <div class="col-md-5 recipe-list-section">
+      <app-recipe-list></app-recipe-list>
+    </div>
+    <div class="col-md-7 recipe-detail-section">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

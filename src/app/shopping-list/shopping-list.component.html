@@ -1,76 +1,103 @@
-<div class="row">
-  <div class="col-xs-10">
-    <div class="row">
-      <div class="col-xs-12">
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-          <div class="row">
-            <div class="col-sm-5 form-group">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                class="form-control"
-                name="name"
-                ngModel
-                required
-              />
+<div class="shopping-list-container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Fancy Form Card -->
+      <div class="card shadow-sm" style="border-radius: 10px; overflow: hidden;">
+        <div class="card-header bg-primary text-white text-center">
+          <h3>{{ editMode ? "Edit Ingredient" : "Add Ingredient" }}</h3>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <!-- Form Inputs -->
+            <div class="row mb-3">
+              <div class="col-md-6 form-group">
+                <label for="name" class="form-label">
+                  <i class="fas fa-carrot"></i> Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-control"
+                  name="name"
+                  placeholder="Enter ingredient name"
+                  ngModel
+                  required
+                />
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="amount" class="form-label">
+                  <i class="fas fa-weight-hanging"></i> Amount
+                </label>
+                <input
+                  type="number"
+                  id="amount"
+                  class="form-control"
+                  name="amount"
+                  placeholder="Enter amount"
+                  ngModel
+                  required
+                  pattern="^[1-9]+[0-9]*$"
+                />
+              </div>
             </div>
-            <div class="col-sm-2 form-group">
-              <label for="amount">Amount</label>
-              <input
-                type="number"
-                id="amount"
-                class="form-control"
-                name="amount"
-                ngModel
-                required
-                pattern="^[1-9]+[0-9]*$"
-              />
+            <!-- Form Buttons -->
+            <div class="row">
+              <div class="col-12 text-center">
+                <button
+                  class="btn btn-success me-2"
+                  type="submit"
+                  [disabled]="!f.valid"
+                >
+                  <i class="fas fa-save"></i>
+                  {{ editMode ? "Update" : "Add" }}
+                </button>
+                <button
+                  class="btn btn-danger me-2"
+                  type="button"
+                  (click)="onDelete()"
+                  *ngIf="editMode"
+                >
+                  <i class="fas fa-trash-alt"></i> Delete
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  (click)="onClear()"
+                >
+                  <i class="fas fa-times-circle"></i> Clear
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <button
-                style="margin-right: 16px"
-                class="btn btn-success"
-                type="submit"
-                [disabled]="!f.valid"
-              >
-                {{ editMode ? "Update" : "Add" }}
-              </button>
-              <button
-                class="btn btn-danger"
-                type="button"
-                (click)="onDelete()"
-                *ngIf="editMode"
-                style="margin-right: 16px"
-              >
-                Delete
-              </button>
-              <button class="btn btn-primary" type="button" (click)="onClear()">
-                Clear
-              </button>
+          </form>
+        </div>
+      </div>
+      <!-- Ingredient List -->
+      <hr />
+      <div class="card shadow-sm mt-4" style="border-radius: 10px;">
+        <div class="card-header bg-info text-white text-center">
+          <h4>Ingredients List</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+          <a
+            class="list-group-item list-group-item-action"
+            *ngFor="
+              let ingredient of ingredients;
+              let i = index;
+              trackBy: trackItem
+            "
+            (click)="onEditItem(i)"
+          >
+            <div class="d-flex justify-content-between align-items-center">
+              <span>
+                <i class="fas fa-utensil-spoon"></i> {{ ingredient.name }}
+              </span>
+              <span class="badge bg-secondary">
+                {{ ingredient.amount }}
+              </span>
             </div>
-          </div>
-        </form>
+          </a>
+        </ul>
       </div>
     </div>
-    <hr />
-    <ul class="list-group">
-      <a
-        class="list-group-item"
-        style="cursor: pointer"
-        *ngFor="
-          let ingredient of ingredients;
-          let i = index;
-          trackBy: trackItem
-        "
-        (click)="onEditItem(i)"
-      >
-        <span *ngIf="ingredient?.amount > 0">
-          {{ ingredient.name }} ({{ ingredient.amount }})</span
-        >
-      </a>
-    </ul>
   </div>
 </div>
